@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatCommonModule, MatInputModule, MatSelectModule, MatOptionModule, MatIconModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCheckboxModule, MatCommonModule, MatInputModule, MatSelectModule, MatOptionModule, MatIconModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { SampleFormComponent } from './sample-form/sample-form.component';
 import { SpeechRecognitionModule } from '@kamiazya/ngx-speech-recognition';
-import { ScribeComponent} from "./scribe-component/scribe.component";
 
 
 @NgModule({
@@ -33,13 +32,12 @@ import { ScribeComponent} from "./scribe-component/scribe.component";
     MatOptionModule,
     MatIconModule],
   exports:
-      [MatButtonModule, MatCheckboxModule, MatCommonModule, MatInputModule,  MatSelectModule, MatOptionModule, MatIconModule],
+    [MatButtonModule, MatCheckboxModule, MatCommonModule, MatInputModule, MatSelectModule, MatOptionModule, MatIconModule],
   declarations: [
     AppComponent,
-    SampleFormComponent,
-    ScribeComponent
+    SampleFormComponent
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 
