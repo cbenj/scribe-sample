@@ -75,7 +75,7 @@ export class SampleFormComponent {
       text: 'What is your proposition of value ?',
       listeners: {
         onend: () => {
-          this.listen("innovative", "innovative")
+          this.listen("valueProposition", "innovative")
         }
       }
     });
