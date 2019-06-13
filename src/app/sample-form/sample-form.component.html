@@ -17,7 +17,7 @@
         <mat-form-field>
             <mat-label for="innovative">Are you really innovative ? </mat-label>
             <mat-select id="innovative" (focus)="innovativeQuestion()" [value]="sampleForm.innovative">
-                <mat-option *ngFor="let response of innovative" [value]="response">{{response}}</mat-option>
+                <mat-option *ngFor="let response of innovativeValues" [value]="response">{{response}}</mat-option>
             </mat-select>
             <mat-icon *ngIf="sampleForm.innovative !=null" matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
@@ -30,13 +30,13 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label for="valueProposition">Which customers have you identified ?</mat-label>
+            <mat-label for="customersIdentified">Which customers have you identified ?</mat-label>
             <textarea cdkTextareaAutosize matInput type="text" id="customersIdentified" (focus)="customersIdentifiedQuestion()"></textarea>
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label for="valueProposition">Who will use the solution ?</mat-label>
+            <mat-label for="useSolution">Who will use the solution ?</mat-label>
             <textarea cdkTextareaAutosize matInput type="text" id="useSolution" (focus)="useSolutionQuestion()"></textarea>
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>

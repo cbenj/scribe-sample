@@ -15,10 +15,16 @@ export class SampleFormComponent {
 
     sampleForm: SampleForm;
     scribeEnabled: boolean;
-    innovative = ["Yes", "No", "Maybe"]
+    innovativeValues = ["Yes", "No", "Maybe"]
     player: any
 
     @ViewChild('valueProposition',  {static: false}) valueProposition: ElementRef;
+    @ViewChild('projectName',  {static: false}) projectName: ElementRef;
+    @ViewChild('innovative',  {static: false}) innovative: ElementRef;
+    @ViewChild('startSolution',  {static: false}) startSolution: ElementRef;
+    @ViewChild('userSolution',  {static: false}) userSolution: ElementRef;
+    @ViewChild('customerSolution',  {static: false}) customerSolution: ElementRef;
+
 
     constructor(public service: RxSpeechRecognitionService) {
         this.player = new Speech();
@@ -65,19 +71,23 @@ export class SampleFormComponent {
         this.player.speak({
             text: 'When did you start to imagine the solution ?'
         });
+        this.listen("imagineSolution");
     }
 
     customersIdentifiedQuestion() {
         this.player.speak({
             text: 'Which customers have you identified ?'
         });
+        this.listen("customersIdentified");
     }
 
     useSolutionQuestion() {
         this.player.speak({
             text: 'Who will use the solution ?'
         });
+        this.listen("useSolution");
     }
+
     listen(fieldname: string, nextInputFocus?: string) {
         if (this.scribeEnabled) {
             this.service
