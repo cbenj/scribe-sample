@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import Speech from "speak-tts";
-import { SampleForm } from "./sample-form";
-import { resultList, RxSpeechRecognitionService } from "@kamiazya/ngx-speech-recognition";
+import {SampleForm} from "./sample-form";
+import {resultList, RxSpeechRecognitionService} from "@kamiazya/ngx-speech-recognition";
 
 @Component({
   selector: 'app-sample-form',
@@ -15,80 +15,119 @@ export class SampleFormComponent {
 
   sampleForm: SampleForm;
   scribeEnabled: boolean;
-  innovative = ["Yes", "No", "Maybe"]
+  innovativeValues = ["Yes", "No", "Maybe"]
   player: any
+
+  @ViewChild('valueProposition',  {static: false}) valueProposition: ElementRef;
+  @ViewChild('projectName',  {static: false}) projectName: ElementRef;
+  @ViewChild('innovative',  {static: false}) innovative: ElementRef;
+  @ViewChild('startSolution',  {static: false}) startSolution: ElementRef;
+  @ViewChild('userSolution',  {static: false}) userSolution: ElementRef;
+  @ViewChild('customerSolution',  {static: false}) customerSolution: ElementRef;
+
 
   constructor(public service: RxSpeechRecognitionService) {
     this.player = new Speech();
     this.player
-      .init({
-        volume: 0.5,
-        lang: "en-GB",
-        rate: 1,
-        pitch: 1,
-        //'voice':'Google UK English Male',
-        //'splitSentences': false,
-        listeners: {
-          onvoiceschanged: voices => {
-            console.log("Voices changed", voices);
-          }
-        }
-      });
+        .init({
+          volume: 0.5,
+          lang: "en-GB",
+          rate: 1,
+          pitch: 1,
+          //'voice':'Google UK English Male',
+          //'splitSentences': false,
+          // listeners: {
+          //    onvoiceschanged: voices => {
+          //        console.log("Voices changed", voices);
+          //    }
+          //}
+        });
     this.sampleForm = new SampleForm();
     this.scribeEnabled = false;
   }
 
   projectNameQuestion() {
+
     this.player.speak({
-      text: 'What is your project name ?'
+      text: 'What is your project name ?',
+      listeners: {
+        onend: () => {
+          this.listen("projectName", "valueProposition")
+        }
+      }
     });
-    this.listen("projectName");
+
   }
 
   innovativeQuestion() {
     this.player.speak({
-      text: 'Are you really innovative?'
+      text: 'Are you really innovative?',
+      listeners: {
+        onend: () => {
+          this.listen("projectName", "valueProposition")
+        }
+      }
     });
-    this.listen("innovative");
   }
 
   valuePropositionQuestion() {
     this.player.speak({
-      text: 'What is your proposition of value ?'
+      text: 'What is your proposition of value ?',
+      listeners: {
+        onend: () => {
+          this.listen("innovative", "startSolution")
+        }
+      }
     });
-    this.listen("valueProposition");
   }
 
   startSolutionQuestion() {
     this.player.speak({
-      text: 'When did you start to imagine the solution ?'
+      text: 'When did you start to imagine the solution ?',
+      listeners: {
+        onend: () => {
+          this.listen("startSolution", "customerSolution")
+        }
+      }
     });
-    this.listen("imagineSolution");
   }
 
   customersIdentifiedQuestion() {
     this.player.speak({
-      text: 'Which customers have you identified ?'
+      text: 'Which customers have you identified ?',
+      listeners: {
+        onend: () => {
+          this.listen("customerSolution", "userSolution")
+        }
+      }
     });
-    this.listen("customersIdentified");
+
   }
 
   useSolutionQuestion() {
     this.player.speak({
-      text: 'Who will use the solution ?'
+      text: 'Who will use the solution ?',
+      listeners: {
+        onend: () => {
+          this.listen("userSolution")
+        }
+      }
     });
-    this.listen("useSolution");
+
   }
 
-  listen(fieldname: string) {
+  listen(fieldname: string, nextInputFocus?: string) {
     if (this.scribeEnabled) {
       this.service
-        .listen()
-        .pipe(resultList)
-        .subscribe((list: SpeechRecognitionResultList) => {
-          this.sampleForm[fieldname] = list.item(0).item(0).transcript;
-          console.log('RxComponent:onresult', this.sampleForm[fieldname], list);
-        });
+          .listen()
+          .pipe(resultList)
+          .subscribe((list: SpeechRecognitionResultList) => {
+            this.sampleForm[fieldname] = list.item(0).item(0).transcript;
+            console.log('RxComponent:onresult', this.sampleForm[fieldname], list);
+            if (nextInputFocus != null) {
+              this[nextInputFocus].nativeElement.focus();
+            }
+          });
     }
   }
 
@@ -100,6 +139,7 @@ export class SampleFormComponent {
     if (!this.scribeEnabled) {
       this.scribeEnabled = true;
     }
+    this.projectName.nativeElement.focus()
   }
 
 }
