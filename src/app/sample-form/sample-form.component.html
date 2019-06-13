@@ -15,7 +15,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label for="innovative">Are you really innovative ? : </mat-label>
+            <mat-label for="innovative">Are you really innovative ? </mat-label>
             <mat-select id="innovative" (focus)="innovativeQuestion()" [value]="sampleForm.innovative">
                 <mat-option *ngFor="let response of innovative" [value]="response">{{response}}</mat-option>
             </mat-select>

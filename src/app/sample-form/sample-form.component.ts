@@ -60,17 +60,22 @@ export class SampleFormComponent {
     }
 
     startSolutionQuestion() {
-
+        this.player.speak({
+            text: 'When did you start to imagine the solution ?'
+        });
     }
 
     customersIdentifiedQuestion() {
-
+        this.player.speak({
+            text: 'Which customers have you identified ?'
+        });
     }
 
     useSolutionQuestion() {
-
+        this.player.speak({
+            text: 'Who will use the solution ?'
+        });
     }
-
     listen(fieldname: string) {
         if (this.scribeEnabled) {
             this.service
