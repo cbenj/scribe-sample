@@ -36,56 +36,79 @@ export class SampleFormComponent {
                 pitch: 1,
                 //'voice':'Google UK English Male',
                 //'splitSentences': false,
-                listeners: {
-                    onvoiceschanged: voices => {
-                        console.log("Voices changed", voices);
-                    }
-                }
+                // listeners: {
+                //    onvoiceschanged: voices => {
+                //        console.log("Voices changed", voices);
+                //    }
+                //}
             });
         this.sampleForm = new SampleForm();
         this.scribeEnabled = false;
     }
 
     projectNameQuestion() {
+
         this.player.speak({
-            text: 'What is your project name ?'
+            text: 'What is your project name ?',
+            listeners: {
+                onend: () => {
+                    this.listen("projectName", "valueProposition")
+                }
+            }
         });
-        this.listen("projectName", "valueProposition");
+
     }
 
     innovativeQuestion() {
         this.player.speak({
-            text: 'Are you really innovative?'
+            text: 'Are you really innovative?',
+            listeners: {
+                onend: () => {
+                    this.listen("projectName", "valueProposition")
+                }
+            }
         });
-        this.listen("innovative");
     }
 
     valuePropositionQuestion() {
         this.player.speak({
-            text: 'What is your proposition of value ?'
+            text: 'What is your proposition of value ?',
+            listeners: {
+                onend: () => {
+                    this.listen("projectName", "valueProposition")
+                }
+            }
         });
-        this.listen("valueProposition", "innovative");
     }
 
     startSolutionQuestion() {
         this.player.speak({
-            text: 'When did you start to imagine the solution ?'
+            text: 'When did you start to imagine the solution ?',
+            listeners: {
+                onend: () => {
+                    this.listen("projectName", "valueProposition")
+                }
+            }
         });
-        this.listen("imagineSolution");
     }
 
     customersIdentifiedQuestion() {
         this.player.speak({
-            text: 'Which customers have you identified ?'
+            text: 'Which customers have you identified ?',
+            listeners: {
+                onend: () => {
+                    this.listen("projectName", "valueProposition")
+                }
+            }
         });
-        this.listen("customersIdentified");
+
     }
 
     useSolutionQuestion() {
         this.player.speak({
             text: 'Who will use the solution ?'
-        });
-        this.listen("useSolution");
+        }).then(()=> {this.listen("useSolution")});
+
     }
 
     listen(fieldname: string, nextInputFocus?: string) {
