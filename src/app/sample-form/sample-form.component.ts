@@ -1,79 +1,56 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import Speech from "speak-tts";
-import {SampleForm} from "./sample-form";
-import {ScribeComponent} from "../scribe-component/scribe.component";
+import { SampleForm } from "./sample-form";
 
 @Component({
-    selector: 'app-sample-form',
-    templateUrl: './sample-form.component.html',
-    styleUrls: ['./sample-form.component.css']
+  selector: 'app-sample-form',
+  templateUrl: './sample-form.component.html',
+  styleUrls: ['./sample-form.component.css']
 })
 export class SampleFormComponent {
 
-    sampleForm: SampleForm;
-    scribeEnabled: boolean;
-    innovative = ["Yes", "No", "Maybe"]
-    player: any
+  sampleForm : SampleForm
+  innovative = ["Yes", "No", "Maybe"]
+  player : any
 
-    constructor() {
-        this.player = new Speech();
-        this.player
-            .init({
-                volume: 0.5,
-                lang: "en-GB",
-                rate: 1,
-                pitch: 1,
-                //'voice':'Google UK English Male',
-                //'splitSentences': false,
-                listeners: {
-                    onvoiceschanged: voices => {
-                        console.log("Voices changed", voices);
-                    }
-                }
-            });
-        this.sampleForm = new SampleForm();
-        this.scribeEnabled = false;
-    }
-
-    projectNameQuestion() {
-        this.player.speak({
-            text: 'What is your project name ?'
+  constructor() {
+    this.player = new Speech();
+    this.player
+        .init({
+          volume: 0.5,
+          lang: "en-GB",
+          rate: 1,
+          pitch: 1,
+          //'voice':'Google UK English Male',
+          //'splitSentences': false,
+          listeners: {
+            onvoiceschanged: voices => {
+              console.log("Voices changed", voices);
+            }
+          }
         });
-    }
+      this.sampleForm = new SampleForm();
+
+  }
+
+  projectNameQuestion() {
+    this.player.speak({
+      text:'What is your project name ?'});
+  }
 
     innovativeQuestion() {
-        this.player.speak({
-            text: 'Are you really innovative?'
-        });
-    }
+    this.player.speak({
+      text:'Are you really innovative?'});
+  }
 
-    valuePropositionQuestion() {
-        this.player.speak({
-            text: 'What is your proposition of value ?'
-        });
-    }
+  valuePropositionQuestion() {
+    this.player.speak({
+        text:'What is your proposition of value ?'});
+  }
 
-    startSolutionQuestion() {
-
-    }
-
-    customersIdentifiedQuestion() {
-
-    }
-
-    useSolutionQuestion() {
-
-    }
-
-    submit() {
-        window.alert('submit !');
-    }
-
-    enableScribe() {
-        if (!this.scribeEnabled) {
-            this.scribeEnabled = true;
-        }
-    }
+  submit() {
+    window.alert('submit !');
+  }
 
 }
 
