@@ -1,31 +1,37 @@
-import { Component } from '@angular/core';
-import { RxSpeechRecognitionService,  resultList } from '@kamiazya/ngx-speech-recognition';
+import {Component, Input} from '@angular/core';
+import {RxSpeechRecognitionService, resultList} from '@kamiazya/ngx-speech-recognition';
 
 @Component({
-  selector: 'app-scribe',
-  templateUrl: './scribe.component.html',
-  styleUrls: ['./scribe.component.css'],
-  providers: [
-    RxSpeechRecognitionService,
-  ]
+    selector: 'app-scribe',
+    template: '',
+    styleUrls: ['./scribe.component.css'],
+    providers: [
+        RxSpeechRecognitionService,
+    ]
 })
 export class ScribeComponent {
 
-  message = '';
+    message = '';
 
-  constructor(
-      public service: RxSpeechRecognitionService,
-  ) { }
+    @Input() fieldname: any;
+    @Input() isEnabled: boolean;
 
-  listen() {
-    this.service
-        .listen()
-        .pipe(resultList)
-        .subscribe((list: SpeechRecognitionResultList) => {
-          this.message = list.item(0).item(0).transcript;
-          console.log('RxComponent:onresult', this.message, list);
-        });
-  }
+    constructor(
+        public service: RxSpeechRecognitionService,
+    ) {
+    }
+
+    listen() {
+        if (this.isEnabled) {
+            this.service
+                .listen()
+                .pipe(resultList)
+                .subscribe((list: SpeechRecognitionResultList) => {
+                    this.fieldname = list.item(0).item(0).transcript;
+                    console.log('RxComponent:onresult', this.message, list);
+                });
+        }
+    }
 
 }
 
