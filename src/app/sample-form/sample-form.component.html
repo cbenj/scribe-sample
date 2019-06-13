@@ -23,19 +23,19 @@
 
         <mat-form-field>
             <mat-label for="imagineSolution">When did you start to imagine the solution ?  </mat-label>
-            <input #startSolution matInput type="date" id="startSolution" (focus)="startSolutionQuestion()">
+            <input #startSolution matInput type="text" id="startSolution" (focus)="startSolutionQuestion()" [value]="sampleForm.startSolution">
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label for="customersIdentified">Which customers have you identified ?</mat-label>
-            <textarea #customerSolution cdkTextareaAutosize matInput type="text" id="customersIdentified" (focus)="customersIdentifiedQuestion()"></textarea>
+            <textarea #customerSolution cdkTextareaAutosize matInput type="text" id="customersIdentified" (focus)="customersIdentifiedQuestion()" [value]="sampleForm.customerSolution"></textarea>
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label for="useSolution">Who will use the solution ?</mat-label>
-            <textarea #userSolution cdkTextareaAutosize matInput type="text" id="useSolution" (focus)="useSolutionQuestion()"></textarea>
+            <textarea #userSolution cdkTextareaAutosize matInput type="text" id="useSolution" (focus)="useSolutionQuestion()" [value]="sampleForm.userSolution"></textarea>
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
 

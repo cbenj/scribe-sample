@@ -1,14 +1,14 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import Speech from "speak-tts";
 import {SampleForm} from "./sample-form";
-import {resultList, RxSpeechRecognitionService} from "@kamiazya/ngx-speech-recognition";
+import {resultList, SpeechRecognitionService} from "@kamiazya/ngx-speech-recognition";
 
 @Component({
   selector: 'app-sample-form',
   templateUrl: './sample-form.component.html',
   styleUrls: ['./sample-form.component.css'],
   providers: [
-    RxSpeechRecognitionService,
+    SpeechRecognitionService,
   ]
 })
 export class SampleFormComponent {
@@ -26,7 +26,7 @@ export class SampleFormComponent {
   @ViewChild('customerSolution',  {static: false}) customerSolution: ElementRef;
 
 
-  constructor(public service: RxSpeechRecognitionService) {
+  constructor(public service: SpeechRecognitionService) {
     this.player = new Speech();
     this.player
         .init({
@@ -117,17 +117,17 @@ export class SampleFormComponent {
   }
 
   listen(fieldname: string, nextInputFocus?: string) {
-    if (this.scribeEnabled) {
-      this.service
-          .listen()
-          .pipe(resultList)
-          .subscribe((list: SpeechRecognitionResultList) => {
-            this.sampleForm[fieldname] = list.item(0).item(0).transcript;
-            console.log('RxComponent:onresult', this.sampleForm[fieldname], list);
-            if (nextInputFocus != null) {
-              this[nextInputFocus].nativeElement.focus();
-            }
-          });
+    if (this.scribeEnabled ) {
+
+      this.service.start();
+      this.service.onresult = (e) => {
+        this.sampleForm[fieldname] = e.results[0].item(0).transcript;
+        console.log('RxComponent:onresult', this.sampleForm[fieldname], e);
+        if (nextInputFocus != null) {
+          this[nextInputFocus].nativeElement.focus();
+        }
+        this.service.stop();
+      };
     }
   }
 
