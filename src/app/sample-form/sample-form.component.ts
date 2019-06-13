@@ -97,7 +97,7 @@ export class SampleFormComponent {
                     this.sampleForm[fieldname] = list.item(0).item(0).transcript;
                     console.log('RxComponent:onresult', this.sampleForm[fieldname], list);
                     if (nextInputFocus != null) {
-                        this.valueProposition.nativeElement.focus();
+                        this[nextInputFocus].nativeElement.focus();
                     }
                 });
         }
