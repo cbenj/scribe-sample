@@ -16,9 +16,7 @@
 
         <mat-form-field>
             <mat-label for="innovative">Are you really innovative ? </mat-label>
-            <mat-select #innovative id="innovative" (focus)="innovativeQuestion()" [value]="sampleForm.innovative">
-                <mat-option *ngFor="let response of innovativeValues" [value]="response">{{response}}</mat-option>
-            </mat-select>
+            <input #innovative id="innovative" matInput (focus)="innovativeQuestion()" [value]="sampleForm.innovative">
             <mat-icon *ngIf="sampleForm.innovative !=null" matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
 
