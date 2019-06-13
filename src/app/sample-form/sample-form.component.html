@@ -3,51 +3,26 @@
 <form (ngSubmit)="submit()">
     <fieldset>
         <mat-form-field>
-            <mat-label for="gender">Genre : </mat-label>
-            <mat-select id="gender" (focus)="sayQuestion1()">
-                <mat-option *ngFor="let gender of genders" [value]="gender">{{gender}}</mat-option>
+            <mat-label for="projectName">Project name</mat-label>
+            <input matInput type="text" id="projectName" (focus)="projectNameQuestion()">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="valueProposition">Proposition of value</mat-label>
+            <textarea cdkTextareaAutosize matInput type="text" id="valueProposition" (focus)="valuePropositionQuestion()"></textarea>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="innovative">Are you really innovative ? : </mat-label>
+            <mat-select id="innovative" (focus)="innovativeQuestion()">
+                <mat-option *ngFor="let response of innovative" [value]="response">{{response}}</mat-option>
             </mat-select>
+            <mat-icon *ngIf="sampleForm.innovative !=null" matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
-        <mat-form-field>
-            <mat-label for="firstname">Nom</mat-label>
-            <input matInput type="text" id="firstname" (focus)="sayQuestion2()">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="lastname">Prénom</mat-label>
-            <input matInput type="text" id="lastname">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="postalCode">Code postal</mat-label>
-            <input matInput type="text" id="postalCode">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="country">Ville</mat-label>
-            <input matInput type="text" id="country">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="streetName"> Nom voie</mat-label>
-            <input matInput type="text" id="streetName">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="streetNumber"> Numéro voie</mat-label>
-            <input matInput type="number" id="streetNumber">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="phone">Numéro de téléphone</mat-label>
-            <input matInput type="phone" id="phone">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="rentCost">Montant du loyer</mat-label>
-            <input matInput type="amount" id="rentCost">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="peopleInHouse">Nombre de personnes au sein du foyer</mat-label>
-            <input matInput type="number" id="peopleInHouse">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="salary">Revenus brut annuels du foyer</mat-label>
-            <input matInput type="amount" id="salary">
-        </mat-form-field>
+
+
         <button type="submit" class="btn btn-success">Valider</button>
     </fieldset>
     <app-scribe></app-scribe>

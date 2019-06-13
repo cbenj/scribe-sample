@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import Speech from "speak-tts";
+import { SampleForm } from "./sample-form";
 
 @Component({
   selector: 'app-sample-form',
@@ -8,7 +9,8 @@ import Speech from "speak-tts";
 })
 export class SampleFormComponent {
 
-  genders = ["Mr", "Ms"]
+  sampleForm : SampleForm
+  innovative = ["Yes", "No", "Maybe"]
   player : any
 
   constructor() {
@@ -26,20 +28,25 @@ export class SampleFormComponent {
               console.log("Voices changed", voices);
             }
           }
-        })
+        });
+      this.sampleForm = new SampleForm();
 
   }
 
-  sayQuestion1() {
+  projectNameQuestion() {
     this.player.speak({
-      text:'What is your gender ?'});
+      text:'What is your project name ?'});
   }
 
-  sayQuestion2() {
+    innovativeQuestion() {
     this.player.speak({
-      text:'What is your name ?'});
+      text:'Are you really innovative?'});
   }
 
+  valuePropositionQuestion() {
+    this.player.speak({
+        text:'What is your proposition of value ?'});
+  }
 
   submit() {
     window.alert('submit !');
