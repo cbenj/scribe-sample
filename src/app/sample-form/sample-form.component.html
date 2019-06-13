@@ -22,8 +22,26 @@
             <mat-icon *ngIf="sampleForm.innovative !=null" matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
 
+        <mat-form-field>
+            <mat-label for="imagineSolution">When did you start to imagine the solution ?  </mat-label>
+            <input matInput type="date" id="startSolution" (focus)="startSolutionQuestion()">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
 
-        <button type="submit" class="btn btn-success">Valider</button>
+        <mat-form-field>
+            <mat-label for="valueProposition">Which customers have you identified ?</mat-label>
+            <textarea cdkTextareaAutosize matInput type="text" id="customersIdentified" (focus)="customersIdentifiedQuestion()"></textarea>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="valueProposition">Who will use the solution ?</mat-label>
+            <textarea cdkTextareaAutosize matInput type="text" id="useSolution" (focus)="useSolutionQuestion()"></textarea>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+
+        <button type="submit" class="btn btn-success">Validate</button>
     </fieldset>
     <app-scribe></app-scribe>
 </form>
