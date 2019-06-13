@@ -10,7 +10,7 @@
 
         <mat-form-field>
             <mat-label for="valueProposition">Proposition of value</mat-label>
-            <textarea cdkTextareaAutosize matInput type="text" id="valueProposition" (focus)="valuePropositionQuestion()" [value]="sampleForm.valueProposition"></textarea>
+            <textarea #valueProposition cdkTextareaAutosize matInput type="text" id="valueProposition" (focus)="valuePropositionQuestion()" [value]="sampleForm.valueProposition"></textarea>
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
 

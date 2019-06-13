@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import Speech from "speak-tts";
 import {SampleForm} from "./sample-form";
 import {resultList, RxSpeechRecognitionService} from "@kamiazya/ngx-speech-recognition";
@@ -17,6 +17,8 @@ export class SampleFormComponent {
     scribeEnabled: boolean;
     innovative = ["Yes", "No", "Maybe"]
     player: any
+
+    @ViewChild('valueProposition',  {static: false}) valueProposition: ElementRef;
 
     constructor(public service: RxSpeechRecognitionService) {
         this.player = new Speech();
@@ -42,7 +44,7 @@ export class SampleFormComponent {
         this.player.speak({
             text: 'What is your project name ?'
         });
-        this.listen("projectName");
+        this.listen("projectName", "valueProposition");
     }
 
     innovativeQuestion() {
@@ -56,7 +58,7 @@ export class SampleFormComponent {
         this.player.speak({
             text: 'What is your proposition of value ?'
         });
-        this.listen("valueProposition");
+        this.listen("valueProposition", "innovative");
     }
 
     startSolutionQuestion() {
@@ -76,7 +78,7 @@ export class SampleFormComponent {
             text: 'Who will use the solution ?'
         });
     }
-    listen(fieldname: string) {
+    listen(fieldname: string, nextInputFocus?: string) {
         if (this.scribeEnabled) {
             this.service
                 .listen()
@@ -84,6 +86,9 @@ export class SampleFormComponent {
                 .subscribe((list: SpeechRecognitionResultList) => {
                     this.sampleForm[fieldname] = list.item(0).item(0).transcript;
                     console.log('RxComponent:onresult', this.sampleForm[fieldname], list);
+                    if (nextInputFocus != null) {
+                        this.valueProposition.nativeElement.focus();
+                    }
                 });
         }
     }
