@@ -8,7 +8,6 @@ import {MatButtonModule, MatCheckboxModule, MatCommonModule, MatInputModule, Mat
 import { AppComponent } from './app.component';
 import { SampleFormComponent } from './sample-form/sample-form.component';
 import { SpeechRecognitionModule } from '@kamiazya/ngx-speech-recognition';
-import { ScribeComponent} from "./scribe-component/scribe.component";
 
 
 @NgModule({
@@ -36,8 +35,7 @@ import { ScribeComponent} from "./scribe-component/scribe.component";
       [MatButtonModule, MatCheckboxModule, MatCommonModule, MatInputModule,  MatSelectModule, MatOptionModule, MatIconModule],
   declarations: [
     AppComponent,
-    SampleFormComponent,
-    ScribeComponent
+    SampleFormComponent
   ],
   bootstrap: [ AppComponent ]
 })

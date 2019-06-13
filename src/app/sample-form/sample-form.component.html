@@ -4,10 +4,8 @@
     <fieldset>
         <mat-form-field>
             <mat-label for="projectName">Project name</mat-label>
-            <app-scribe [fieldname]="sampleForm.projectName" [isEnabled]="scribeEnabled" >
                 <input matInput type="text" id="projectName" (focus)="projectNameQuestion(); " [value]="sampleForm.projectName">
                 <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-            </app-scribe>
         </mat-form-field>
 
         <mat-form-field>
@@ -18,7 +16,7 @@
 
         <mat-form-field>
             <mat-label for="innovative">Are you really innovative ? : </mat-label>
-            <mat-select id="innovative" (focus)="innovativeQuestion()">
+            <mat-select id="innovative" (focus)="innovativeQuestion()" [value]="sampleForm.innovative">
                 <mat-option *ngFor="let response of innovative" [value]="response">{{response}}</mat-option>
             </mat-select>
             <mat-icon *ngIf="sampleForm.innovative !=null" matSuffix>sentiment_very_satisfied</mat-icon>

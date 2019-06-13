@@ -1,12 +1,15 @@
 import {Component} from '@angular/core';
 import Speech from "speak-tts";
 import {SampleForm} from "./sample-form";
-import {ScribeComponent} from "../scribe-component/scribe.component";
+import {resultList, RxSpeechRecognitionService} from "@kamiazya/ngx-speech-recognition";
 
 @Component({
     selector: 'app-sample-form',
     templateUrl: './sample-form.component.html',
-    styleUrls: ['./sample-form.component.css']
+    styleUrls: ['./sample-form.component.css'],
+    providers: [
+        RxSpeechRecognitionService,
+    ]
 })
 export class SampleFormComponent {
 
@@ -15,7 +18,7 @@ export class SampleFormComponent {
     innovative = ["Yes", "No", "Maybe"]
     player: any
 
-    constructor() {
+    constructor(public service: RxSpeechRecognitionService) {
         this.player = new Speech();
         this.player
             .init({
@@ -39,18 +42,21 @@ export class SampleFormComponent {
         this.player.speak({
             text: 'What is your project name ?'
         });
+        this.listen("projectName");
     }
 
     innovativeQuestion() {
         this.player.speak({
             text: 'Are you really innovative?'
         });
+        this.listen("innovative");
     }
 
     valuePropositionQuestion() {
         this.player.speak({
             text: 'What is your proposition of value ?'
         });
+        this.listen("valueProposition");
     }
 
     startSolutionQuestion() {
@@ -63,6 +69,18 @@ export class SampleFormComponent {
 
     useSolutionQuestion() {
 
+    }
+
+    listen(fieldname: string) {
+        if (this.scribeEnabled) {
+            this.service
+                .listen()
+                .pipe(resultList)
+                .subscribe((list: SpeechRecognitionResultList) => {
+                    this.sampleForm[fieldname] = list.item(0).item(0).transcript;
+                    console.log('RxComponent:onresult', this.sampleForm[fieldname], list);
+                });
+        }
     }
 
     submit() {
