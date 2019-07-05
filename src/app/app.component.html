@@ -1,3 +1,29 @@
-<div class="container">
-  <app-sample-form></app-sample-form>
-</div>
+<mat-grid-list cols="2" rowHeight="5:1" class="app">
+
+    <mat-grid-tile class="title-tile">
+        <div class="Green-Gradient-BG">
+            <img src="./assets/logo-s-2-s.png"
+                 srcset="./assets/logo-s-2-s@2x.png 2x,
+                 ./assets/logo-s-2-s@3x.png 3x"
+                 class="logo-s2s">
+            Speak2Scribe soutient l’égalité d’accès  aux démarches.
+        </div>
+        <div class="title">
+        Vous parlez,
+        <div class="text-style-1">il remplit</div>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="Light-BG" rowspan="5">
+        <app-sample-form style="width: 100%"></app-sample-form>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="subttitle-tile">
+        <span class="Tagline">Un assistant vocal pour soutenir l'égalité dans l'accès aux démarches </span>
+    </mat-grid-tile>
+
+    <mat-grid-tile rowspan="3">
+        <img class="illustration" src="./assets/Asset 1@4x.png" style="margin-left: 123px;"/>
+    </mat-grid-tile>
+
+</mat-grid-list>

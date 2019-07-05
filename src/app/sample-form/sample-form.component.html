@@ -1,51 +1,43 @@
-<h2>Formulaire</h2>
-
-<form (ngSubmit)="submit()">
-    <fieldset>
-        <mat-form-field>
-            <mat-label for="projectName">Project name</mat-label>
-            <input #projectName matInput type="text" id="projectName" (focus)="projectNameQuestion(); " [value]="sampleForm.projectName">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+<form (ngSubmit)="submit()" class="form-container">
+        <mat-form-field class="mat-form-field">
+            <mat-label for="projectName">Nom du projet</mat-label>
+            <input #projectName matInput type="text" id="projectName" (focus)="projectNameQuestion(); " [value]="sampleForm.projectName != null ? sampleForm.projectName : ''">
+            <mat-icon *ngIf="sampleForm.projectName !=null" matSuffix>done</mat-icon>
         </mat-form-field>
 
-        <mat-form-field>
-            <mat-label for="valueProposition">Proposition of value</mat-label>
-            <textarea #valueProposition cdkTextareaAutosize matInput type="text" id="valueProposition" (focus)="valuePropositionQuestion()" [value]="sampleForm.valueProposition"></textarea>
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-form-field class="mat-form-field">
+            <mat-label for="valueProposition">Proposition de valeurs</mat-label>
+            <textarea #valueProposition cdkTextareaAutosize matInput type="text" id="valueProposition" (focus)="valuePropositionQuestion()" [value]="sampleForm.valueProposition != null ? sampleForm.valueProposition : ''"></textarea>
+            <mat-icon *ngIf="sampleForm.valueProposition !=null" matSuffix>done</mat-icon>
         </mat-form-field>
 
-        <mat-form-field>
-            <mat-label for="innovative">Are you really innovative ? </mat-label>
-            <input #innovative id="innovative" matInput (focus)="innovativeQuestion()" [value]="sampleForm.innovative">
-            <mat-icon *ngIf="sampleForm.innovative !=null" matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-form-field class="mat-form-field">
+            <mat-label for="innovative">Etes-vous innovant ?</mat-label>
+            <input #innovative id="innovative" matInput (focus)="innovativeQuestion()" [value]="sampleForm.innovative != null ? sampleForm.innovative : ''">
+            <mat-icon *ngIf="sampleForm.innovative !=null" matSuffix>done</mat-icon>
         </mat-form-field>
 
-
-        <mat-form-field>
-            <mat-label for="imagineSolution">When did you start to imagine the solution ?  </mat-label>
-            <input #startSolution matInput type="text" id="startSolution" (focus)="startSolutionQuestion()" [value]="sampleForm.startSolution">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-form-field class="mat-form-field">
+            <mat-label for="imagineSolution">Date de début du projet </mat-label>
+            <input #startSolution matInput type="text" id="startSolution" (focus)="startSolutionQuestion()" [value]="sampleForm.startSolution != null ? sampleForm.startSolution : ''">
+            <mat-icon *ngIf="sampleForm.startSolution !=null" matSuffix>done</mat-icon>
         </mat-form-field>
 
-        <mat-form-field>
-            <mat-label for="customersIdentified">Which customers have you identified ?</mat-label>
-            <textarea #customerSolution cdkTextareaAutosize matInput type="text" id="customersIdentified" (focus)="customersIdentifiedQuestion()" [value]="sampleForm.customerSolution"></textarea>
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-form-field class="mat-form-field">
+            <mat-label for="customersIdentified">Clients potentiels</mat-label>
+            <textarea #customerSolution cdkTextareaAutosize matInput type="text" id="customersIdentified" (focus)="customersIdentifiedQuestion()" [value]="sampleForm.customerSolution != null ? sampleForm.customerSolution : ''"></textarea>
+            <mat-icon *ngIf="sampleForm.customerSolution !=null" matSuffix>done</mat-icon>
         </mat-form-field>
 
-        <mat-form-field>
-            <mat-label for="useSolution">Who will use the solution ?</mat-label>
-            <textarea #userSolution cdkTextareaAutosize matInput type="text" id="useSolution" (focus)="useSolutionQuestion()" [value]="sampleForm.userSolution"></textarea>
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-form-field class="mat-form-field">
+            <mat-label for="useSolution">A qui s'adresse-t-elle ?</mat-label>
+            <textarea #userSolution cdkTextareaAutosize matInput type="text" id="useSolution" (focus)="useSolutionQuestion()" [value]="sampleForm.userSolution != null ? sampleForm.userSolution : ''"></textarea>
+            <mat-icon *ngIf="sampleForm.userSolution !=null" matSuffix>done</mat-icon>
         </mat-form-field>
 
-        <button type="submit" class="btn btn-success">Valider</button>
-    </fieldset>
+        <div> <button #submitbtn type="submit" id="submitbtn" class="btn btn-success Rectangle-13">SOUMETTRE</button><span>ou tapez ENTRER</span></div>
 
-
-    <button mat-button (click)="enableScribe()" type="button">
-        <img width="50px" src="./assets/logo_speak2scribe_small.png"/>
+    <button mat-button (click)="enableScribe()" type="button" id="btnEnableScribe" class="VB-Speaking-Logo">
+        <img width="64px" src="./assets/Innovathon_S2S_Logo_Animation_Speaking_On_1_00.gif"/>
     </button>
-
-
 </form>

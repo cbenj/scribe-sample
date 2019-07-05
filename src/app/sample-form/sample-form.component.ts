@@ -17,24 +17,24 @@ export class SampleFormComponent {
   scribeEnabled: boolean;
   innovativeValues = ["Yes", "No", "Maybe"]
   player: any
-
+  scribePlayer : any;
   @ViewChild('valueProposition',  {static: false}) valueProposition: ElementRef;
   @ViewChild('projectName',  {static: false}) projectName: ElementRef;
   @ViewChild('innovative',  {static: false}) innovative: ElementRef;
   @ViewChild('startSolution',  {static: false}) startSolution: ElementRef;
   @ViewChild('userSolution',  {static: false}) userSolution: ElementRef;
   @ViewChild('customerSolution',  {static: false}) customerSolution: ElementRef;
-
+  @ViewChild('submitbtn',  {static: false}) submitbtn: ElementRef;
 
   constructor(public service: SpeechRecognitionService) {
     this.player = new Speech();
     this.player
         .init({
           volume: 0.5,
-          lang: "en-GB",
+          lang: "fr-FR",
           rate: 1,
           pitch: 1,
-          //'voice':'Google UK English Male',
+          voice:'Thomas',
           //'splitSentences': false,
           // listeners: {
           //    onvoiceschanged: voices => {
@@ -42,17 +42,34 @@ export class SampleFormComponent {
           //    }
           //}
         });
+    this.scribePlayer = new Speech();
+    this.scribePlayer
+        .init({
+          volume: 0.5,
+          lang: "fr-FR",
+          rate: 1,
+          pitch: 1,
+          voice:'Google français'
+        });
     this.sampleForm = new SampleForm();
     this.scribeEnabled = false;
   }
 
   projectNameQuestion() {
 
-    this.player.speak({
-      text: 'What is your project name ?',
+    this.scribePlayer.speak({
+      text: 'Quel est le nom de votre projet ?',
       listeners: {
         onend: () => {
-          this.listen("projectName", "valueProposition")
+          this.player.speak({
+            text: 'Spik tou scribe',
+            listeners: {
+              onend: () => {
+                this.sampleForm["projectName"] = "speak to scribe";
+                this["valueProposition"].nativeElement.focus();
+              }
+            }
+          })
         }
       }
     });
@@ -60,44 +77,76 @@ export class SampleFormComponent {
   }
 
   innovativeQuestion() {
-    this.player.speak({
-      text: 'Are you really innovative?',
+    this.scribePlayer.speak({
+      text: 'Etes-vous vraiment innovant ?',
       listeners: {
         onend: () => {
-          this.listen("innovative", "startSolution")
+          this.player.speak({
+            text: 'Absolument',
+            listeners: {
+              onend: () => {
+                this.sampleForm["innovative"] = "Absolument";
+                this["startSolution"].nativeElement.focus();
+              }
+            }
+          })
         }
       }
     });
   }
 
   valuePropositionQuestion() {
-    this.player.speak({
-      text: 'What is your proposition of value ?',
+    this.scribePlayer.speak({
+      text: 'Quelle est votre proposition de valeur ?',
       listeners: {
         onend: () => {
-          this.listen("valueProposition", "innovative")
+          this.player.speak({
+            text: "L'égalité face aux démarches !",
+            listeners: {
+              onend: () => {
+                this.sampleForm["valueProposition"] = "L'égalité face aux démarches";
+                this["innovative"].nativeElement.focus();
+              }
+            }
+          })
         }
       }
     });
   }
 
   startSolutionQuestion() {
-    this.player.speak({
-      text: 'When did you start to imagine the solution ?',
+    this.scribePlayer.speak({
+      text: 'Quand avez vous imaginé votre solution ?',
       listeners: {
         onend: () => {
-          this.listen("startSolution", "customerSolution")
+          this.player.speak({
+            text: "Pour l'innovathon 2019 !",
+            listeners: {
+              onend: () => {
+                this.sampleForm["startSolution"] = "Pour l'innovathon 2019";
+                this["customerSolution"].nativeElement.focus();
+              }
+            }
+          })
         }
       }
     });
   }
 
   customersIdentifiedQuestion() {
-    this.player.speak({
-      text: 'Which customers have you identified ?',
+    this.scribePlayer.speak({
+      text: 'Quels sont les clients potentiels ?',
       listeners: {
         onend: () => {
-          this.listen("customerSolution", "userSolution")
+          this.player.speak({
+            text: 'Toute entreprise, administration, collectivités !',
+            listeners: {
+              onend: () => {
+                this.sampleForm["customerSolution"] = "Toute entreprise, administration, collectivités";
+                this["userSolution"].nativeElement.focus();
+              }
+            }
+          })
         }
       }
     });
@@ -105,15 +154,22 @@ export class SampleFormComponent {
   }
 
   useSolutionQuestion() {
-    this.player.speak({
-      text: 'Who will use the solution ?',
+    this.scribePlayer.speak({
+      text: 'A qui s adresse-t-il ?',
       listeners: {
         onend: () => {
-          this.listen("userSolution")
+          this.player.speak({
+            text: 'A tousse',
+            listeners: {
+              onend: () => {
+                this.sampleForm["userSolution"] = "A tous";
+                this["submitbtn"].nativeElement.focus();
+              }
+            }
+          })
         }
       }
     });
-
   }
 
   listen(fieldname: string, nextInputFocus?: string) {

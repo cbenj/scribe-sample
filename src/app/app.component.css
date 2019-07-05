@@ -1,9 +1,89 @@
-p {
-  font-family: Lato;
+.app {
+    height: 100%;
 }
 
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/
+.title-tile {
+    padding-top: 10%;
+    margin-top : 32px;
+}
+
+.title {
+    font-family: Roboto;
+    font-size: 74px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: start;
+    line-height: 1;
+    height: 220px;
+    margin :  74px;
+    letter-spacing: 1.32px;
+    color: #ffffff;
+    width: 100%;
+    padding-top : 32px;
+}
+
+.subttitle-tile {
+    font-family: Roboto;
+    font-weight: lighter;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: start;
+    line-height: 1;
+    margin : 74px;
+    letter-spacing: 1.32px;
+    color: #ffffff;
+    width: 100%;
+}
+.title .text-style-1 {
+    color: #bbe486;
+}
+
+.Tagline {
+    width: 100%;
+    height: 30%;
+    font-family: Roboto;
+    font-size: 2em;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
+.Light-BG {
+    width: 40%;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+.illustration {
+    width: 742px;
+    height: 515px;
+    object-fit: contain;
+}
+
+.app-sample-form {
+    height: 100%;
+    width: 100%;
+}
+
+.logo-s2s {
+    width: 132px;
+    height: 127px;
+    padding-top : 16px;
+    padding-bottom : 8px;
+
+
+}
+
+.Green-Gradient-BG {
+    margin-top: 32px;
+    width : 132px;
+    height: 220px;
+    margin-left : 32px;
+    border-top: 3px solid #8bc53f;
+    vertical-align: text-bottom;
+    font-size: 10px;
+    color: #ffffff;
+}

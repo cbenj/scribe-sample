@@ -3,7 +3,7 @@ export class SampleForm {
 
     projectName:string
     valueProposition:string
-    innovative:boolean
+    innovative:string
     startSolution:string
     customerSolution:string
     userSolution: string
